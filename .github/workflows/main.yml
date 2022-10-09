@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JFROG_BUILD_STATUS: PASS
-      NODE_VERSION: 3.9
+      NODE_VERSION: 16
       NPM_REPO: bee-npm
       PROMOTE_REPO: urs-generic-release-local
     steps:
@@ -86,9 +86,9 @@ jobs:
     needs: build_webapp
     runs-on: ubuntu-latest
     env:
-      DOCKER_REG: yann.jfrog.io
+      DOCKER_REG: yann-sbx.dev.gcp.devopsacc.team
       DOCKER_REPO: urs-docker
-      DOCKER_USER: yannc@jfrog.com
+      DOCKER_USER: admin
       PROMOTE_REPO: urs-docker-release-local
     steps:
       - uses: actions/checkout@v2
