@@ -50,11 +50,11 @@ jobs:
       - name: Configure JFrog CLI and NPM client
         run: jf npm-config --repo-resolve ${{ env.NPM_REPO }} --server-id-resolve ${{ env.SERVER_ID }}
 
+      - name: Install dependencies
+        run: jf npm ci --module=node_webapp
+
       - name: Scan dependencies
         run:  jf audit 
-
-      - name: Install dependencies
-        run: jf npm i --module=node_webapp
 
       - name: Package and upload webapp
         run: |
