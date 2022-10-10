@@ -106,6 +106,9 @@ jobs:
             --build-name=docker-$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER \
             ${{ env.GENERIC_REPO }} webapp.tar.gz
 
+      - name: Debug
+        run: ls -l 
+
       - name: Docker Login
         uses: docker/login-action@v1.10.0
         with:
@@ -116,10 +119,7 @@ jobs:
       - name: Build Docker images
         uses: docker/build-push-action@v3
         with:
-          build-args: |
-            RT_TOKEN=${{ secrets.RT_SECRET }}
-            RT_USER=${{ env.DOCKER_USER }}
-            REGISTRY=${{ env.DOCKER_REG }}
+          context: ./
           tags: ${{ env.DOCKER_REG }}/${{ env.DOCKER_REPO }}/gha-js-webapp:${{ env.APP_VERSION }}
 
       - name: Scan Docker image 
