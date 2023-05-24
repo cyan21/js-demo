@@ -15,7 +15,7 @@ env:
   JF_ENV_1: ${{ secrets.JF_DEMO_SECRET }}
   # the server_id is injected in the JF_SECRET and refers to the CLI profile name
   SERVER_ID: psemea-gha
-  JF_CLI_VERSION: 2.27.1
+  JF_CLI_VERSION: 2.34.2
   APP_VERSION: 1.0.0
   GENERIC_REPO: yann-generic
   JFROG_CLI_BUILD_PROJECT: yann
