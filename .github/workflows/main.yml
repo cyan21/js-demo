@@ -12,12 +12,13 @@ on:
   workflow_dispatch:
 
 env:
-  JF_ENV_1: ${{ secrets.JF_SECRET }}
+  JF_ENV_1: ${{ secrets.JF_DEMO_SECRET }}
   # the server_id is injected in the JF_SECRET and refers to the CLI profile name
   SERVER_ID: yann-sbx
   JF_CLI_VERSION: 2.27.1
   APP_VERSION: 1.0.0
-  GENERIC_REPO: urs-generic
+  GENERIC_REPO: yann-generic
+  JFROG_CLI_BUILD_PROJECT: yann
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,7 +28,7 @@ jobs:
       JFROG_BUILD_STATUS: PASS
       NODE_VERSION: 16
       NPM_REPO: bee-npm
-      PROMOTE_REPO: urs-generic-release-local
+      PROMOTE_REPO: yann-generic-release-local
     steps:
       - uses: actions/checkout@v2
 
@@ -86,10 +87,10 @@ jobs:
     needs: build_webapp
     runs-on: ubuntu-latest
     env:
-      DOCKER_REG: yann-sbx.dev.gcp.devopsacc.team
-      DOCKER_REPO: urs-docker
-      DOCKER_USER: admin
-      PROMOTE_REPO: urs-docker-release-local
+      DOCKER_REG: psemea.jfrog.io
+      DOCKER_REPO: yann-docker
+      DOCKER_USER: gha_yann_svc
+      PROMOTE_REPO: yann-docker-release-local
     steps:
       - uses: actions/checkout@v2
 
@@ -104,6 +105,7 @@ jobs:
             --props "version=${{ env.APP_VERSION }}" \
             --build $JFROG_CLI_BUILD_NAME/$JFROG_CLI_BUILD_NUMBER  \
             --build-name=docker-$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER \
+            --project $JFROG_CLI_BUILD_PROJECT \
             ${{ env.GENERIC_REPO }} webapp.tar.gz
 
       - name: Debug
@@ -114,7 +116,7 @@ jobs:
         with:
           registry: ${{ env.DOCKER_REG }}
           username: ${{ env.DOCKER_USER }}
-          password: ${{ secrets.RT_SECRET }}
+          password: ${{ secrets.DOCKER_DEMO_PASS }}
 
       - name: Build Docker images
         uses: docker/build-push-action@v3
