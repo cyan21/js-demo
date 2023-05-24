@@ -52,7 +52,7 @@ jobs:
         run: jf npm-config --repo-resolve ${{ env.NPM_REPO }} --server-id-resolve ${{ env.SERVER_ID }}
 
       - name: Install dependencies
-        run: jf npm ci --module=node_webapp
+        run: jf npm install --module=node_webapp
 
       - name: Scan dependencies
         run:  jf audit 
