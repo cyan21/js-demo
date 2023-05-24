@@ -27,7 +27,7 @@ jobs:
     env:
       JFROG_BUILD_STATUS: PASS
       NODE_VERSION: 16
-      NPM_REPO: bee-npm
+      NPM_REPO: yann-npm
       PROMOTE_REPO: yann-generic-release-local
     steps:
       - uses: actions/checkout@v2
