@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JFROG_BUILD_STATUS: PASS
-      NODE_VERSION: 16
+      NODE_VERSION: 18
       NPM_REPO: yann-npm
       PROMOTE_REPO: yann-generic-release-local
     steps:
@@ -49,10 +49,10 @@ jobs:
             jf rt ping
             
       - name: Configure JFrog CLI and NPM client
-        run: jf npm-config --repo-resolve ${{ env.NPM_REPO }} --server-id-resolve ${{ env.SERVER_ID }}
+        run: jf npmc --repo-resolve ${{ env.NPM_REPO }} --server-id-resolve ${{ env.SERVER_ID }}
 
       - name: Install dependencies
-        run: jf npm install --module=node_webapp
+        run: jf npm ci --module=node_webapp
 
       - name: Scan dependencies
         run:  jf audit 
