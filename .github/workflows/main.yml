@@ -26,7 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JFROG_BUILD_STATUS: PASS
-      NODE_VERSION: 18
+      # bug : https://github.com/npm/cli/issues/3555#issuecomment-1080556783
+      NODE_VERSION: 14
       NPM_REPO: yann-npm
       PROMOTE_REPO: yann-generic-release-local
     steps:
