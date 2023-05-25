@@ -54,6 +54,7 @@ jobs:
       - name: Install dependencies
         run: |
           cat .jfrog/projects/npm.yaml
+          rm -f package-lock.json
           jf npm ci --module=node_webapp
 
       - name: Scan dependencies
