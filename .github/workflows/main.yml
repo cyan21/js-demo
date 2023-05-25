@@ -82,7 +82,11 @@ jobs:
         run: echo "deploy and test"
 
       - name: Set properties
-        run: jf rt sp --build $JFROG_CLI_BUILD_NAME/$JFROG_CLI_BUILD_NUMBER ${{ env.GENERIC_REPO }}/ "test.unit=ok;version=${{ env.APP_VERSION }}"
+        run: |
+          jf rt sp \
+            --build $JFROG_CLI_BUILD_NAME/$JFROG_CLI_BUILD_NUMBER \
+            --project=$JFROG_CLI_BUILD_PROJECT \
+            ${{ env.GENERIC_REPO }}/ "test.unit=ok;version=${{ env.APP_VERSION }}"
 
       - name: Promote Build 
         run: jf rt bpr --status "XRAY_SCAN_OK" --comment "promoted to the next level" ${{ env.PROMOTE_REPO }}
