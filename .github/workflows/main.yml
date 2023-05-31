@@ -95,7 +95,7 @@ jobs:
     needs: build_webapp
     runs-on: ubuntu-latest
     env:
-      DOCKER_REG: psemea.jfrog.io
+      DOCKER_REG: yann-sbx.dev.gcp.devopsacc.team
       DOCKER_REPO: yann-docker
       DOCKER_USER: gha_yann_svc
       PROMOTE_REPO: yann-docker-release-local
